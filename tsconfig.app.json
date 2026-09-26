@@ -4,8 +4,7 @@
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "./out-tsc/app",
-    //outDir daba error sin esto
-    "rootDir": "/src",
+    "rootDir": ".",
     "types": []
   },
   "include": [

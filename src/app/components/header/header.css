@@ -1,0 +1,26 @@
+header{
+  padding: 20px 40px;
+}
+
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo{
+  font-size: 24px;
+    color: #103fe8;
+  font-weight: bold;
+}
+
+.navigation{
+  display: flex;
+  gap: 20px;
+}
+
+.navigation a{
+  text-decoration: none;
+  color: #103fe8;
+  font-size: 18px;
+}
