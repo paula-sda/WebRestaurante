@@ -1,26 +1,36 @@
 header{
   padding: 20px 40px;
-}
-
-nav{
+  background-color: #000000;
+  color:#f4eee5;
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
 .logo{
-  font-size: 24px;
-    color: #103fe8;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
   font-weight: bold;
+  letter-spacing: 4px;
 }
 
-.navigation{
+nav{
   display: flex;
   gap: 20px;
+  align-items: center;
 }
 
-.navigation a{
-  text-decoration: none;
-  color: #103fe8;
+nav a{
+  font-family: 'Montserrat', sans-serif;
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-decoration:none;
+  color: #f4eee5;
   font-size: 18px;
+  text-transform: uppercase;
+}
+
+nav a:hover{
+  color: #c7a46a;
+  text-decoration:underline;
 }
