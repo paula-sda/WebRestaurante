@@ -1,0 +1,55 @@
+:host{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.drinks-menu{
+  min-height: 100vh;
+  background-image:url('/images/img2.jpg');
+  background-size: cover;
+  background-position: center;
+
+  position: relative;
+  padding: 100px 10%;
+  box-sizing: border-box;
+
+  color: #fff;
+}
+
+  .drinks-menu::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 10, 10, 0.5);
+  }
+
+  .menu-header{
+    position: relative;
+    z-index: 1;
+  }
+
+  .menu-header h2{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+  }
+
+  .menu-header p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 8px;
+    color: #ffffff;
+  }
+
+
+
+
+
+
