@@ -4,8 +4,9 @@
     <p>Explora nuestra selección de cócteles y cafés.</p>
 
     <div class="drinks-grid">
-      <app-drink-card></app-drink-card>
-
+      @for(drink of drinks; track drink.name) {
+      <app-drink-card [drink]="drink"></app-drink-card>
+      }
 
 
     </div>

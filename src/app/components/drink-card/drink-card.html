@@ -1,6 +1,6 @@
 <div class="drink-card">
-<img src="/images/img2.jpg" alt="Coctel" >
+<img [src]="drink().image" [alt]="drink().name" >
 <div class="drink-info">
-  <h3>Nombre del coctel</h3>
-  <p>Alcohol</p>
+  <h3>{{drink().name}}</h3>
+  <p>{{drink().alcohol}}</p>
 </div>
