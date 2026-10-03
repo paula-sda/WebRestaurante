@@ -1,6 +1,10 @@
 <div class="drink-card">
-<img [src]="drink().image" [alt]="drink().name" >
+<img [src]="drink().strDrinkThumb" [alt]="drink().strDrink" >
 <div class="drink-info">
-  <h3>{{drink().name}}</h3>
-  <p>{{drink().alcohol}}</p>
+  <h3>{{drink().strDrink}}</h3>
+  @if (drink().strAlcoholic === 'Alcoholic') {
+    <p>Con alcohol</p>
+  } @else {
+    <p>Sin alcohol</p>
+  }
 </div>

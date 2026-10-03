@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { DrinkCard } from '../../components/drink-card/drink-card';
+import {HttpClient} from '@angular/common/http';
+import { Drink } from '../../models/drink';
 
 @Component({
   selector: 'app-menu',
@@ -9,12 +11,32 @@ import { DrinkCard } from '../../components/drink-card/drink-card';
 })
 export class Menu {
 
-  drinks=[
-    {name:'Mojito', alcohol:true, image:'/images/img1.jpg'},
-    {name:'Piña Colada', alcohol:true, image:'/images/img2.jpg'},
-    {name:'Margarita', alcohol:true, image:'/images/img3.jpg'},
-    {name:'Cuba Libre', alcohol:true, image:'/images/img4.jpg'},
-    {name:'Daiquiri', alcohol:true, image:'/images/img5.jpg'},
-    {name:'Caipirinha', alcohol:true, image:'/images/img6.jpg'},
-  ]
+  constructor(private http: HttpClient) {this.getDrinks();}
+  drinks: Drink[]=[];
+//Como en la API no hay un endpoint que me devuelva todos los drinks, he tenido que hacer 3 peticiones a la API para obtener los drinks que empiezan por A, B y C. He buscado la solucion con ChatGPT
+
+getDrinks() {
+
+  this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
+    .subscribe(respuestaA => {
+
+      this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b')
+        .subscribe(respuestaB => {
+
+          this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=M')
+            .subscribe(respuestaC => {
+
+              this.drinks = [
+                ...respuestaA.drinks,
+                ...respuestaB.drinks,
+                ...respuestaC.drinks
+              ];
+
+            });
+
+        });
+
+    });
+
+}
 }

@@ -1,5 +1,6 @@
 export interface Drink{
-  name: string;
-  alcohol: boolean;
-  image: string;
+  idDrink: string;
+  strDrink: string;
+  strAlcoholic: string;
+  strDrinkThumb: string;
 }

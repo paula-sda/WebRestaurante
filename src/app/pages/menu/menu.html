@@ -4,7 +4,7 @@
     <p>Explora nuestra selección de cócteles y cafés.</p>
 
     <div class="drinks-grid">
-      @for(drink of drinks; track drink.name) {
+      @for(drink of drinks; track drink.idDrink) {
       <app-drink-card [drink]="drink"></app-drink-card>
       }
 
