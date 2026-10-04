@@ -29,8 +29,14 @@ export class Menu {
             console.log('Beidas No ALcoholicas:',bebidasNoAlcohol);
 
             this.drinks.set([
-              ...bebidasAlcohol.drinks,
-              ...bebidasNoAlcohol.drinks
+              ...bebidasAlcohol.drinks.map((drink: Drink) => ({
+                ...drink,
+                strAlcoholic: 'Alcoholic'
+              })),
+              ...bebidasNoAlcohol.drinks.map((drink: Drink) => ({
+                ...drink,
+                strAlcoholic: 'Non_Alcoholic'
+              }))
             ]);
           });
       },
