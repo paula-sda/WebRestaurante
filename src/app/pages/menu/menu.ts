@@ -20,45 +20,23 @@ export class Menu {
 
     console.log('Obteniendo drinks...');
 
-    this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=m')
-      .subscribe(respuestaA => {
-        console.log(respuestaA);
+    this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic')
+      .subscribe(bebidasAlcohol => {
+        console.log('Beidas ALcoholicas:',bebidasAlcohol);
 
-        this.drinks.set(respuestaA.drinks);
-        console.log(this.drinks());
+        this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic')
+          .subscribe(bebidasNoAlcohol => {
+            console.log('Beidas No ALcoholicas:',bebidasNoAlcohol);
+
+            this.drinks.set([
+              ...bebidasAlcohol.drinks,
+              ...bebidasNoAlcohol.drinks
+            ]);
+          });
       },
       error => {
         console.error('Error al obtener los drinks:', error);
       });
   }
-
-
-//Como en la API no hay un endpoint que me devuelva todos los drinks, he tenido que hacer 3 peticiones a la API para obtener los drinks que empiezan por A, B y C. He buscado la solucion con ChatGPT
-/*
-getDrinks() {
-
-  this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=a')
-    .subscribe(respuestaA => {
-
-      this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=b')
-        .subscribe(respuestaB => {
-
-          this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=M')
-            .subscribe(respuestaC => {
-
-              this.drinks = [
-                ...respuestaA.drinks,
-                ...respuestaB.drinks,
-                ...respuestaC.drinks
-              ];
-
-            });
-
-        });
-
-    });
-
-}
-*/
 }
 
