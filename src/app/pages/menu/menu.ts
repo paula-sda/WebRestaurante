@@ -16,6 +16,8 @@ export class Menu {
     console.log('Menu creado');
     this.getDrinks();}
 
+    //consultado con chatgpt porque la API no devuelve todas las bebidas y tengo que sumar las alcoholicas y no alcoholicas
+    //consaltado con chatgpt porque la api no contine el precio
   getDrinks() {
 
     console.log('Obteniendo drinks...');
