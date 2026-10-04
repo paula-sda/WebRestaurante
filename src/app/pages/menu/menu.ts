@@ -31,18 +31,29 @@ export class Menu {
             this.drinks.set([
               ...bebidasAlcohol.drinks.map((drink: Drink) => ({
                 ...drink,
-                strAlcoholic: 'Alcoholic'
+                strAlcoholic: 'Alcoholic',
+                price: this.getPrice(drink.idDrink)
               })),
               ...bebidasNoAlcohol.drinks.map((drink: Drink) => ({
                 ...drink,
-                strAlcoholic: 'Non_Alcoholic'
+                strAlcoholic: 'Non_Alcoholic',
+                price: this.getPrice(drink.idDrink)
               }))
             ]);
+
+            console.log('Drinks finales:', this.drinks());
           });
       },
       error => {
         console.error('Error al obtener los drinks:', error);
       });
+  }
+
+  getPrice(idDrink: string): number {
+    const id = Number(idDrink);
+
+    const price = 5 + (id %6) * 0.5;
+    return price;
   }
 }
 

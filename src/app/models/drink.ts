@@ -3,4 +3,5 @@ export interface Drink{
   strDrink: string;
   strAlcoholic: string;
   strDrinkThumb: string;
+  price: number;
 }
