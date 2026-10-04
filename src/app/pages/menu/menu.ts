@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component,signal } from '@angular/core';
 import { DrinkCard } from '../../components/drink-card/drink-card';
 import {HttpClient} from '@angular/common/http';
 import { Drink } from '../../models/drink';
@@ -10,7 +10,7 @@ import { Drink } from '../../models/drink';
   styleUrl: './menu.css',
 })
 export class Menu {
-  drinks: Drink[]=[];
+  drinks = signal<Drink[]>([]);
 
   constructor(private http: HttpClient) {
     console.log('Menu creado');
@@ -24,8 +24,8 @@ export class Menu {
       .subscribe(respuestaA => {
         console.log(respuestaA);
 
-        this.drinks = respuestaA.drinks;
-        console.log(this.drinks);
+        this.drinks.set(respuestaA.drinks);
+        console.log(this.drinks());
       },
       error => {
         console.error('Error al obtener los drinks:', error);
