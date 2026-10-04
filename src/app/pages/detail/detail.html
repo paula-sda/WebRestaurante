@@ -1,0 +1,39 @@
+@if (drink(); as bebida){
+
+<section class="detail">
+<div class="detail-container">
+  <div class="detail-image">
+    <img [src]="bebida.strDrinkThumb" [alt]="bebida.strDrink">
+  </div>
+  <div class="detail-info">
+    <h1>{{bebida.strDrink}}</h1>
+
+    <div class="detail-section">
+      <h2>Ingredientes</h2>
+      <p>listado de ingredientes</p>
+    </div>
+
+    <div class="detail-section">
+      <h2>Tipo</h2>
+      @if (bebida.strAlcoholic === 'Alcoholic') {
+        <p>Con alcohol</p>
+      } @else {
+        <p>Sin alcohol</p>
+      }
+    </div>
+
+    <div class="detail-section">
+      <h2>Precio</h2>
+      <p>{{bebida.price}} €</p>
+    </div>
+
+    <button>Volver al menu</button>
+
+  </div>
+</div>
+</section>
+
+
+} @else {
+  <p>Cargando...</p>
+}
