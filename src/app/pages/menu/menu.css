@@ -9,6 +9,7 @@
   background-image:url('/images/img2.jpg');
   background-size: cover;
   background-position: center;
+  background-attachment: fixed;
 
   position: relative;
   padding: 100px 10%;

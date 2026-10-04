@@ -2,9 +2,11 @@ import { Component,signal } from '@angular/core';
 import { Drink } from '../../models/drink';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import {RouterLink} from '@angular/router';
+
 @Component({
   selector: 'app-detail',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './detail.html',
   styleUrl: './detail.css',
 })
