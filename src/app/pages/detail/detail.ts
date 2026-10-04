@@ -21,7 +21,9 @@ export class Detail {
 
       this.http.get<any>(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
         .subscribe(resultado => {
-            this.drink.set(resultado.drinks[0]);
+            const bebida = resultado.drinks[0];
+              bebida.price = this.getPrice(bebida.idDrink);
+              this.drink.set(bebida);
             console.log('Bebida:', this.drink());
         },
         error => {
@@ -31,4 +33,11 @@ export class Detail {
         });
 
         }
+
+    getPrice(idDrink: string): number {
+      const id = Number(idDrink);
+
+      const price = 5 + (id %6) * 0.5;
+      return price;
+    }
 }
