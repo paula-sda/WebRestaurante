@@ -12,6 +12,8 @@ import { DrinkService } from '../../services/drink';
 })
 export class Detail {
   drink=signal<Drink|null>(null);
+  ingredients = signal<{name: string, image: string}[]>([]);
+
   constructor(
     private drinkService: DrinkService,
     private route: ActivatedRoute
@@ -25,6 +27,20 @@ export class Detail {
             const bebida = resultado.drinks[0];
             bebida.price = this.drinkService.getPrice(bebida.idDrink);
             this.drink.set(bebida);
+
+            const ingredientList: {name: string, image: string}[] = [];
+
+            for (let i = 1; i <= 15; i++) {
+              const nombre = bebida[`strIngredient${i}`];
+              if (nombre) {
+                ingredientList.push({ 
+                  name: nombre, 
+                  image: `https://www.thecocktaildb.com/images/ingredients/${nombre}.png` 
+                });
+              }
+            }
+            this.ingredients.set(ingredientList);
+
             console.log('Bebida:', this.drink());
         },
         error => {
