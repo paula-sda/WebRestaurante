@@ -1,0 +1,157 @@
+:host{
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.reservations{
+  min-height: 100vh;
+  background-image:url('/images/img3.jpg');
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+
+  position: relative;
+  padding: 100px 10%;
+  box-sizing: border-box;
+
+  color: #fff;
+}
+
+  .reservations::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(15, 10, 10, 0.5);
+  }
+
+  .reservation-header{
+    position: relative;
+    z-index: 1;
+  }
+
+  .reservation-header h2{
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 70px;
+    font-weight: 400;
+    text-align: center;
+    margin: 0;
+  }
+
+  .reservation-header p{
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 8px;
+    color: #ffffff;
+  }
+
+.reservations-panel {
+  padding: 35px;
+  border: 1px solid rgba(197, 163, 107, 0.6);
+  border-radius: 10px;
+  background-color: rgba(18, 13, 15, 0.9);
+}
+
+.reservations-panel h2 {
+  color: #c5a36b;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: normal;
+  margin: 20px 0;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.form-grid label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  color: #e5dada;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+}
+
+.form-grid input,
+.form-grid select {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px;
+  box-sizing: border-box;
+
+  border: 1px solid #65464d;
+  border-radius: 5px;
+  background-color: #211a1c;
+  color: #fff;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+}
+
+.reservations-panel button {
+  display: block;
+  margin: 30px auto 0;
+  padding: 14px 28px;
+
+  border: 1px solid #c5a36b;
+  border-radius: 5px;
+  background-color: #79283a;
+  color: #fff;
+
+  font-family: 'Montserrat', sans-serif;
+  cursor: pointer;
+}
+
+.reservations-panel button:hover:not(:disabled) {
+  background-color: #96364b;
+}
+
+.reservations-panel button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.reservation-message {
+  margin-top: 25px;
+  padding: 18px;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+}
+
+.error {
+  border: 1px solid #bd5864;
+  background-color: #32171c;
+  color: #ffd8dc;
+}
+
+.success {
+  border: 1px solid #c5a36b;
+  background-color: #211c16;
+  color: #f2e4c9;
+}
+
+@media (max-width: 600px) {
+  .reservations-page {
+    padding: 35px 15px;
+  }
+
+  .reservations-heading h1 {
+    font-size: 40px;
+  }
+
+  .reservations-panel {
+    padding: 22px 16px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+}
