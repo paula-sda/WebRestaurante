@@ -1,8 +1,8 @@
 import { Component,signal } from '@angular/core';
 import { Drink } from '../../models/drink';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
 import {RouterLink} from '@angular/router';
+import { DrinkService } from '../../services/drink';
 
 @Component({
   selector: 'app-detail',
@@ -12,8 +12,10 @@ import {RouterLink} from '@angular/router';
 })
 export class Detail {
   drink=signal<Drink|null>(null);
+  ingredients = signal<{name: string, image: string}[]>([]);
+
   constructor(
-    private http: HttpClient,
+    private drinkService: DrinkService,
     private route: ActivatedRoute
   ) {
 
@@ -21,11 +23,24 @@ export class Detail {
       const id = params['id'];
       console.log('ID del drink:', id);
 
-      this.http.get<any>(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`)
-        .subscribe(resultado => {
+      this.drinkService.getDrinkById(id).subscribe(resultado => {
             const bebida = resultado.drinks[0];
-              bebida.price = this.getPrice(bebida.idDrink);
-              this.drink.set(bebida);
+            bebida.price = this.drinkService.getPrice(bebida.idDrink);
+            this.drink.set(bebida);
+
+            const ingredientList: {name: string, image: string}[] = [];
+
+            for (let i = 1; i <= 15; i++) {
+              const nombre = bebida[`strIngredient${i}`];
+              if (nombre) {
+                ingredientList.push({ 
+                  name: nombre, 
+                  image: `https://www.thecocktaildb.com/images/ingredients/${nombre}.png` 
+                });
+              }
+            }
+            this.ingredients.set(ingredientList);
+
             console.log('Bebida:', this.drink());
         },
         error => {
@@ -36,10 +51,5 @@ export class Detail {
 
         }
 
-    getPrice(idDrink: string): number {
-      const id = Number(idDrink);
-
-      const price = 5 + (id %6) * 0.5;
-      return price;
-    }
+  
 }

@@ -80,3 +80,25 @@
 
   cursor: pointer;
 }
+
+.ingredients{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.ingredient{
+  text-align: center;
+}
+
+.ingredient img{
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.ingredient p{
+  margin-top: 8px;
+  font-family: 'Montserrat', sans-serif;
+}

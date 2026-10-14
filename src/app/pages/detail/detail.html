@@ -10,7 +10,16 @@
 
     <div class="detail-section">
       <h2>Ingredientes</h2>
-      <p>listado de ingredientes</p>
+
+      <div class="ingredients">
+        @for (ingredient of ingredients(); track ingredient.name) {
+          <div class="ingredient">
+            <img [src]="ingredient.image" [alt]="ingredient.name">
+            <p>{{ingredient.name}}</p>
+          </div>
+        }
+      </div>
+
     </div>
 
     <div class="detail-section">
