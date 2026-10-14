@@ -88,6 +88,10 @@
 }
 
 .ingredient{
+  width: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
@@ -99,6 +103,70 @@
 }
 
 .ingredient p{
+  width: 100%;
   margin-top: 8px;
   font-family: 'Montserrat', sans-serif;
+  overflow-wrap: anywhere;
+}
+
+/*le he preguntado a la IA para que me ayudara con las medidas y como ajustar el diseño sin tenr que hacer pruebas de loq ue mejor funcionaba todo el rato.
+Tambien he ido adaptando los valores proporcionados por la IA por los que me he comprobado que cuadraban mas
+*/
+@media (max-width: 850px) {
+  .detail {
+    padding: 24px 5%;
+  }
+
+  .detail-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 16px;
+    align-items: start;
+  }
+
+  .detail-image {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+  }
+
+  .detail-info {
+    min-width: 0;
+    padding: 20px;
+  }
+
+  .detail-info h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    margin-bottom: 20px;
+  }
+
+  .detail-section {
+    margin-bottom: 16px;
+  }
+
+  .ingredients {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .detail {
+    padding: 20px 16px;
+  }
+
+  .detail-container {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  .detail-image {
+    aspect-ratio: 16 / 10;
+  }
+
+  .detail-info {
+    padding: 20px;
+  }
+
+  .detail-info h1 {
+    font-size: clamp(2rem, 8vw, 2.75rem);
+  }
 }

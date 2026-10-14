@@ -1,4 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* He preguntado a la IA que aspectos editar para que la web sea responsive y aqui he puesto los que afectarian a todos*/
+*,
+*::before,
+*::after{
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
 }
+html, body{
+  min-width: 320px;
+}
+
+img {display: block;
+max-width: 100%;
+}
+ .web-container{
+  min-height: 100vh;
+  min-height: 100dvh;
+ }
+
+ main{
+  width: 100%;
+  min-width: 0;
+ }
+
+
+
