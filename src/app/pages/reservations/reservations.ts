@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { EmailService } from '../../services/email';
 
 @Component({
   selector: 'app-reservations',
@@ -19,9 +20,13 @@ export class Reservations {
 
   error='';
   confirmado = false;
+  enviando = false;
    minFecha = this.fechaActual();
 
-   constructor(private route: ActivatedRoute){
+   constructor(
+    private route: ActivatedRoute,
+    private emailService: EmailService,
+   ){
     this.fecha=this.route.snapshot.queryParamMap.get('fecha') || this.fechaActual();
     this.hora=this.route.snapshot.queryParamMap.get('hora') || '20:00';
     this.personas = Number(this.route.snapshot.queryParamMap.get('personas') || 2);
@@ -37,7 +42,7 @@ export class Reservations {
 
    }
 
-   confirmarReserva(form: { invalid: boolean | null }){
+   async confirmarReserva(form: { invalid: boolean | null }): Promise<void>{
     this.error = '';
     this.confirmado= false;
 
@@ -55,6 +60,23 @@ export class Reservations {
       this.error='Lo sentimos, no hay disponibilidad para esa fecha y hora.';
       return;
     }
-    this.confirmado=true;
+
+    this.enviando = true;
+    try {
+      await this.emailService.sendReservationConfirmation({
+        email: this.email,
+        nombre: this.nombre,
+        fecha: this.fecha,
+        hora: this.hora,
+        personas: this.personas,
+        telefono: this.telefono,
+      });
+      this.confirmado = true;
+    } catch (error) {
+      console.error('No se pudo enviar el correo de confirmación:', error);
+      this.error = 'No se pudo enviar el correo de confirmación. Inténtalo de nuevo más tarde.';
+    } finally {
+      this.enviando = false;
+    }
    }
 }

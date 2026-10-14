@@ -85,8 +85,8 @@
               required>
           </label>
         </div>
-        <button type="submit" [disabled]="reservaForm.invalid || (fecha !== '' && fecha < minFecha)">
-          Confirmar reserva
+        <button type="submit" [disabled]="reservaForm.invalid || (fecha !== '' && fecha < minFecha) || enviando">
+          {{ enviando ? 'Enviando...' : 'Confirmar reserva' }}
         </button>
       </form>
 
