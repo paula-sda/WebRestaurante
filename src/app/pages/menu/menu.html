@@ -3,8 +3,42 @@
     <h2>Nuestro Menú de Bebidas</h2>
     <p>Explora nuestra selección de cócteles y cafés.</p>
 
+    <div class="drink-filters">
+      <div class="type-filters">
+        <button
+        [class.active]="selectedType() === 'all'"
+        (click)="selectedType.set('all')">
+          Todas
+        </button>
+        <button
+        [class.active]="selectedType() === 'Alcoholic'"
+        (click)="selectedType.set('Alcoholic')">
+          Con Alcohol
+        </button>
+        <button
+        [class.active]="selectedType() === 'Non_Alcoholic'"
+        (click)="selectedType.set('Non_Alcoholic')">
+          Sin Alcohólicas
+        </button>
+      </div>
+    </div>
+
+    <details class ="price-filter">
+      <summary>Precio: {{minPrice()}} € - {{maxPrice()}} €</summary>
+      <div class="price-controls">
+        <label>
+          Precio minimo: {{minPrice()}} €
+          <input type="range" min="5" max="7" step="0.5" [value]="minPrice()" (input)="minPrice.set(+$any($event.target).value)">
+        </label>
+        <label>
+          Precio maximo: {{maxPrice()}} €
+          <input type="range" min="5" max="8" step="0.5" [value]="maxPrice()" (input)="maxPrice.set(+$any($event.target).value)">
+        </label>
+      </div>
+    </details>
+
     <div class="drinks-grid">
-      @for(drink of drinks(); track drink.idDrink) {
+      @for(drink of filteredDrinks(); track drink.idDrink) {
       <app-drink-card [drink]="drink"></app-drink-card>
       }
 

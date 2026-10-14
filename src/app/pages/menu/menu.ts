@@ -1,4 +1,4 @@
-import { Component,signal } from '@angular/core';
+import { Component,signal,computed } from '@angular/core';
 import { DrinkCard } from '../../components/drink-card/drink-card';
 import {HttpClient} from '@angular/common/http';
 import { Drink } from '../../models/drink';
@@ -11,6 +11,18 @@ import { Drink } from '../../models/drink';
 })
 export class Menu {
   drinks = signal<Drink[]>([]);
+  selectedType = signal('all');
+  minPrice =signal(5);
+  maxPrice = signal(8);
+
+  filteredDrinks = computed(() => {
+    return this.drinks().filter(drink => {
+      const matchesType = this.selectedType() === 'all' || drink.strAlcoholic === this.selectedType();
+      const matchesPrice = drink.price >= this.minPrice() && drink.price <= this.maxPrice();
+      return matchesType && matchesPrice;
+    });
+  });
+
 
   constructor(private http: HttpClient) {
     console.log('Menu creado');

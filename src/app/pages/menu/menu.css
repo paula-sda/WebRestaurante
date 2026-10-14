@@ -56,6 +56,87 @@
     gap: 30px;
   }
 
+  /*Filtros del menu*/
+
+  .drink-filters{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap:24px;
+    margin-top:35px;
+  }
+
+  .drink-filters .type-filters{
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px;
+  }
+
+  .drink-filters button{
+    padding: 10px 22px;
+    border: 1px solid rgba(225, 225, 225, 0.6);
+    border-radius: 25px;
+    background-color: rgba(20, 15, 15, 0.55);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    cursor: pointer;
+  }
+
+  .drink-filters button:hover{
+    background-color: rgba(120, 25, 40, 0.7);
+    border-color:#d8b477;
+  }
+
+  .drink-filters button.active{
+    background-color: rgba(120, 25, 40, 0.7);
+    border-color:#d8b477;
+    color:#fff;
+
+  }
+
+  .price-filter{
+    width: fit-content;
+    max-width: 100%;
+    margin: 18px auto 0;
+    padding: 12px 18px;
+    border: 1px solid rgba(216, 180, 119, 0.6);
+    border-radius: 10px;
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+  }
+
+  .price-filter summary{
+    cursor: pointer;
+    color: #f0d4a0;
+    text-align: center;
+    list-style-position: inside;
+  }
+
+  .price-controls{
+    display: flex;
+    flex-direction: column;
+    gap:15px;
+    margin-top: 10px;
+  }
+
+  .price-controls label{
+    display: flex;
+    flex-direction: column;
+    gap:8px;
+    min-width: 200px;
+  }
+
+  .price-controls input[type="range"]{
+    width:100px;
+    accent-color: #b94b60;
+    cursor: pointer;
+  }
+
+
 
 
 
