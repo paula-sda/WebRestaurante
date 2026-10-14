@@ -7,3 +7,45 @@
   </div>
 </section>
 
+<section class="home-reservation">
+  <form class="home-reservation-form" (ngSubmit)="reservar()">
+    <label>
+      Fecha
+      <input
+        type="date"
+        name="fecha"
+        [(ngModel)]="fecha"
+        [min]="fechaActual()"
+        required>
+    </label>
+
+    <label>
+      Hora
+      <select name="hora" [(ngModel)]="hora" required>
+        <option value="18:00">18:00</option>
+        <option value="18:30">18:30</option>
+        <option value="19:00">19:00</option>
+        <option value="19:30">19:30</option>
+        <option value="20:00">20:00</option>
+        <option value="20:30">20:30</option>
+        <option value="21:00">21:00</option>
+        <option value="21:30">21:30</option>
+      </select>
+    </label>
+
+    <label>
+      Número de personas
+      <select name="personas" [(ngModel)]="personas" required>
+        <option [ngValue]="1">1 persona</option>
+        <option [ngValue]="2">2 personas</option>
+        <option [ngValue]="3">3 personas</option>
+        <option [ngValue]="4">4 personas</option>
+        <option [ngValue]="5">5 personas</option>
+        <option [ngValue]="6">6 personas</option>
+      </select>
+    </label>
+
+    <button type="submit">Realizar reserva</button>
+  </form>
+</section>
+

@@ -1,6 +1,7 @@
 :host{
   flex: 1;
   display: flex;
+  flex-direction: column;
 }
 .hero{
   flex: 1;
@@ -68,5 +69,69 @@ button{
 }
 button:hover{
   box-shadow:0 10px 20px rgba(236, 230, 230, 0.522);
+}
+
+.home-reservation{
+  width: 100%;
+  padding: 16px clamp(14px, 4vw, 40px);
+  background-color: #000000;
+  color:#fff;
+  border: 3px solid #8f0a0a;
+  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.home-reservation h2{
+  margin: 0 0 12px;
+  text-align: center;
+  font-size: 20px;
+}
+
+.home-reservation-form {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) auto;
+  align-items: end;
+  gap: 12px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.home-reservation-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.home-reservation-form input,
+.home-reservation-form select {
+  width: 100%;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid #aaa;
+  border-radius: 6px;
+  background: #fff;
+  color: #171414;
+  font: inherit;
+}
+
+.home-reservation-form button {
+  padding: 9px 14px;
+  border: 1px solid #dbc8c8;
+  border-radius: 8px;
+  background: #4e1f02;
+  color: #fff;
+  cursor: pointer;
+  font: inherit;
+}
+
+@media (max-width: 700px) {
+  .home-reservation-form {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-reservation-form button {
+    grid-column: 1 / -1;
+  }
 }
 
