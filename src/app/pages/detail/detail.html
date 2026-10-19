@@ -1,48 +1,43 @@
-@if (drink(); as bebida){
-
-<section class="detail">
-<div class="detail-container">
-  <div class="detail-image">
-    <img [src]="bebida.strDrinkThumb" [alt]="bebida.strDrink">
-  </div>
-  <div class="detail-info">
-    <h1>{{bebida.strDrink}}</h1>
-
-    <div class="detail-section">
-      <h2>Ingredientes</h2>
-
-      <div class="ingredients">
-        @for (ingredient of ingredients(); track ingredient.name) {
-          <div class="ingredient">
-            <img [src]="ingredient.image" [alt]="ingredient.name">
-            <p>{{ingredient.name}}</p>
-          </div>
-        }
+@if (drink(); as bebida) {
+  <section class="detail">
+    <div class="detail-container">
+      <div class="detail-image">
+        <img [src]="bebida.strDrinkThumb" [alt]="bebida.strDrink" />
       </div>
+      <div class="detail-info">
+        <h1>{{ bebida.strDrink }}</h1>
 
+        <div class="detail-section">
+          <h2>Ingredientes</h2>
+
+          <div class="ingredients">
+            @for (ingredient of ingredients(); track ingredient.name) {
+              <div class="ingredient">
+                <img [src]="ingredient.image" [alt]="ingredient.name" />
+                <p>{{ ingredient.name }}</p>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div class="detail-section">
+          <h2>Tipo</h2>
+          @if (bebida.strAlcoholic === 'Alcoholic') {
+            <p>Con alcohol</p>
+          } @else {
+            <p>Sin alcohol</p>
+          }
+        </div>
+
+        <div class="detail-section">
+          <h2>Precio</h2>
+          <p>{{ bebida.price }} €</p>
+        </div>
+
+        <button routerLink="/menu">Volver al menu</button>
+      </div>
     </div>
-
-    <div class="detail-section">
-      <h2>Tipo</h2>
-      @if (bebida.strAlcoholic === 'Alcoholic') {
-        <p>Con alcohol</p>
-      } @else {
-        <p>Sin alcohol</p>
-      }
-    </div>
-
-    <div class="detail-section">
-      <h2>Precio</h2>
-      <p>{{bebida.price}} €</p>
-    </div>
-
-    <button routerLink="/menu">Volver al menu</button>
-
-  </div>
-</div>
-</section>
-
-
+  </section>
 } @else {
   <p>Cargando...</p>
 }

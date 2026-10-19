@@ -1,9 +1,9 @@
-import { Component,signal,computed } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { firstValueFrom } from 'rxjs';
 
 import { DrinkCard } from '../../components/drink-card/drink-card';
 import { Drink } from '../../models/drink';
-import{DrinkService} from '../../services/drink';
+import { DrinkService } from '../../services/drink';
 
 @Component({
   selector: 'app-menu',
@@ -14,54 +14,56 @@ import{DrinkService} from '../../services/drink';
 export class Menu {
   drinks = signal<Drink[]>([]);
   selectedType = signal('all');
-  minPrice =signal(5);
+  minPrice = signal(5);
   maxPrice = signal(8);
+  loading = signal(true);
+  error=signal('');
 
   filteredDrinks = computed(() => {
-    return this.drinks().filter(drink => {
-      const matchesType = this.selectedType() === 'all' || drink.strAlcoholic === this.selectedType();
+    return this.drinks().filter((drink) => {
+      const matchesType =
+        this.selectedType() === 'all' || drink.strAlcoholic === this.selectedType();
       const matchesPrice = drink.price >= this.minPrice() && drink.price <= this.maxPrice();
       return matchesType && matchesPrice;
     });
   });
 
-
   constructor(private drinkService: DrinkService) {
     console.log('Menu creado');
-    this.getDrinks();}
+    this.getDrinks();
+  }
 
-    //consultado con chatgpt porque la API no devuelve todas las bebidas y tengo que sumar las alcoholicas y no alcoholicas
-    //consaltado con chatgpt porque la api no contine el precio
+  //consultado con chatgpt porque la API no devuelve todas las bebidas y tengo que sumar las alcoholicas y no alcoholicas
+  //consaltado con chatgpt porque la api no contine el precio
   async getDrinks() {
-
     console.log('Obteniendo drinks...');
-    try{
-
+    this.loading.set(true);
+    this.error.set('');
+    try {
       const alcoholicDrinks = await firstValueFrom(this.drinkService.getDrinks());
       console.log('Alcoholic drinks:', alcoholicDrinks);
       const nonAlcoholicDrinks = await firstValueFrom(this.drinkService.getNonAlcoholicDrinks());
       console.log('Non-Alcoholic drinks:', nonAlcoholicDrinks);
 
-      this.drinks.set([...alcoholicDrinks.drinks.map((drink:Drink) =>({
-        ...drink,
-        strAlcoholic: 'Alcoholic',
-        price: this.drinkService.getPrice(drink.idDrink)
-      })),
-      ...nonAlcoholicDrinks.drinks.map((drink:Drink) =>({
-        ...drink,
-        strAlcoholic: 'Non-Alcoholic',
-        price: this.drinkService.getPrice(drink.idDrink)
-      }))
-    ]);
+      this.drinks.set([
+        ...alcoholicDrinks.drinks.map((drink: Drink) => ({
+          ...drink,
+          strAlcoholic: 'Alcoholic',
+          price: this.drinkService.getPrice(drink.idDrink),
+        })),
+        ...nonAlcoholicDrinks.drinks.map((drink: Drink) => ({
+          ...drink,
+          strAlcoholic: 'Non-Alcoholic',
+          price: this.drinkService.getPrice(drink.idDrink),
+        })),
+      ]);
 
-    console.log('Todas las bebidas:', this.drinks().length);
-  }catch (error) {
-    console.error('Error al obtener las bebidas:', error);
+      console.log('Todas las bebidas:', this.drinks().length);
+    } catch (error) {
+      console.error('Error al obtener las bebidas:', error);
+      this.error.set('No se han podido cargar las bebidas. Intentalo de nuevo.')
+    } finally{
+      this.loading.set(false);
+    }
   }
 }
-
-
-
-
-    }
-

@@ -1,7 +1,7 @@
-import { Component,signal } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { Drink } from '../../models/drink';
 import { ActivatedRoute } from '@angular/router';
-import {RouterLink} from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { DrinkService } from '../../services/drink';
 
 @Component({
@@ -11,45 +11,42 @@ import { DrinkService } from '../../services/drink';
   styleUrl: './detail.css',
 })
 export class Detail {
-  drink=signal<Drink|null>(null);
-  ingredients = signal<{name: string, image: string}[]>([]);
+  drink = signal<Drink | null>(null);
+  ingredients = signal<{ name: string; image: string }[]>([]);
 
   constructor(
     private drinkService: DrinkService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
   ) {
-
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params) => {
       const id = params['id'];
       console.log('ID del drink:', id);
 
-      this.drinkService.getDrinkById(id).subscribe(resultado => {
-            const bebida = resultado.drinks[0];
-            bebida.price = this.drinkService.getPrice(bebida.idDrink);
-            this.drink.set(bebida);
+      this.drinkService.getDrinkById(id).subscribe(
+        (resultado) => {
+          const bebida = resultado.drinks[0];
+          bebida.price = this.drinkService.getPrice(bebida.idDrink);
+          this.drink.set(bebida);
 
-            const ingredientList: {name: string, image: string}[] = [];
+          const ingredientList: { name: string; image: string }[] = [];
 
-            for (let i = 1; i <= 15; i++) {
-              const nombre = bebida[`strIngredient${i}`];
-              if (nombre) {
-                ingredientList.push({ 
-                  name: nombre, 
-                  image: `https://www.thecocktaildb.com/images/ingredients/${nombre}.png` 
-                });
-              }
+          for (let i = 1; i <= 15; i++) {
+            const nombre = bebida[`strIngredient${i}`];
+            if (nombre) {
+              ingredientList.push({
+                name: nombre,
+                image: `https://www.thecocktaildb.com/images/ingredients/${nombre}.png`,
+              });
             }
-            this.ingredients.set(ingredientList);
+          }
+          this.ingredients.set(ingredientList);
 
-            console.log('Bebida:', this.drink());
+          console.log('Bebida:', this.drink());
         },
-        error => {
+        (error) => {
           console.error('Error en la peticion', error);
-
-          });
-        });
-
-        }
-
-  
+        },
+      );
+    });
+  }
 }
