@@ -83,12 +83,19 @@
           </label>
         </div>
         @if (!confirmado) {
-          <button
-            type="submit"
-            [disabled]="reservaForm.invalid || (fecha !== '' && fecha < minFecha) || enviando"
+          <span 
+          class="reservation-popover"
+          matTooltip="Completa correctamente todos los campos" 
+          matTooltipPosition="right"
           >
-            {{ enviando ? 'Enviando...' : 'Confirmar reserva' }}
-          </button>
+            <button
+              matButton="elevated"
+              type="submit"
+              [disabled]="reservaForm.invalid || (fecha !== '' && fecha < minFecha) || enviando"
+            >
+              {{ enviando ? 'Enviando...' : 'Confirmar reserva' }}
+            </button>
+          </span>
         }
       </form>
 

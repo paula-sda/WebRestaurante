@@ -137,6 +137,11 @@
   background-color: #211c16;
   color: #f2e4c9;
 }
+.reservation-popover {
+  display: block;
+  width: fit-content;
+  margin: 30px auto 0;
+}
 
 @media (max-width: 600px) {
   .reservations-page {

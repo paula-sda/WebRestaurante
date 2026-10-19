@@ -2,10 +2,12 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { EmailService } from '../../services/email';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatButtonModule} from '@angular/material/button';
 
 @Component({
   selector: 'app-reservations',
-  imports: [FormsModule],
+  imports: [FormsModule, MatTooltipModule, MatButtonModule],
   templateUrl: './reservations.html',
   styleUrl: './reservations.css',
 })
