@@ -3,19 +3,13 @@
     <h2>Reserva tu mesa</h2>
     <p>Completa tus datos para preparar tu proxima visita</p>
 
-
     <div class="reservations-panel">
       <form #reservaForm="ngForm" (ngSubmit)="confirmarReserva(reservaForm)">
         <h2>Datos de la reserva</h2>
-        <div class ="form-grid">
+        <div class="form-grid">
           <label>
             Fecha
-            <input
-              type="date"
-              name="fecha"
-              [(ngModel)]="fecha"
-              [min]="minFecha"
-              required>
+            <input type="date" name="fecha" [(ngModel)]="fecha" [min]="minFecha" required />
             @if (fecha && fecha < minFecha) {
               <small class="field-error" role="alert">La fecha no puede ser anterior a hoy.</small>
             }
@@ -56,9 +50,10 @@
               [(ngModel)]="nombre"
               minlength="2"
               autocomplete="name"
-              required>
+              required
+            />
           </label>
-<!--He utilizado chat para buscar el patron del telefono y del email-->
+          <!--He utilizado chat para buscar el patron del telefono y del email-->
           <label>
             Correo electrónico
             <input
@@ -68,7 +63,8 @@
               #emailCtrl="ngModel"
               pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
               autocomplete="email"
-              required>
+              required
+            />
             @if (emailCtrl.invalid && emailCtrl.touched) {
               <small>Introduce un correo válido, por ejemplo nombre@dominio.com.</small>
             }
@@ -82,29 +78,35 @@
               [(ngModel)]="telefono"
               pattern="[0-9+() -]{9,16}"
               autocomplete="tel"
-              required>
+              required
+            />
           </label>
         </div>
-        <button type="submit" [disabled]="reservaForm.invalid || (fecha !== '' && fecha < minFecha) || enviando">
-          {{ enviando ? 'Enviando...' : 'Confirmar reserva' }}
-        </button>
+        @if (!confirmado) {
+          <button
+            type="submit"
+            [disabled]="reservaForm.invalid || (fecha !== '' && fecha < minFecha) || enviando"
+          >
+            {{ enviando ? 'Enviando...' : 'Confirmar reserva' }}
+          </button>
+        }
       </form>
 
-      @if (error){
+      @if (error) {
         <div class="reservation-message error" role="alert">
-            {{ error }}
+          {{ error }}
         </div>
       }
 
-      @if (confirmado){
+      @if (confirmado) {
         <div class="reservation-message success" role="status">
           <h2>¡Solicitud completada!</h2>
-          <p><strong>Nombre: </strong>{{nombre}}</p>
-          <p><strong>Fecha: </strong>{{fecha}}</p>
-          <p><strong>Hora: </strong>{{hora}}</p>
-          <p><strong>Personas: </strong>{{personas}}</p>
+          <p><strong>Nombre: </strong>{{ nombre }}</p>
+          <p><strong>Fecha: </strong>{{ fecha }}</p>
+          <p><strong>Hora: </strong>{{ hora }}</p>
+          <p><strong>Personas: </strong>{{ personas }}</p>
         </div>
       }
-
-  </div>
+    </div>
+  </section>
 </section>
