@@ -2,8 +2,9 @@
 
     <div class="logo">Rouge de Minuit</div>
     <nav>
-        <a routerLink="/">Home</a>
-        <a routerLink="/menu">Menu</a>
-        <a routerLink="/reservas">Reservas</a>
+        <a routerLink="/" routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true}">Home</a>
+        <a routerLink="/menu" routerLinkActive="active">Menu</a>
+        <a routerLink="/reservas" routerLinkActive="active">Reservas</a>
   </nav>
 </header>

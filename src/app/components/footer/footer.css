@@ -19,8 +19,8 @@ footer{
   font-size: 42px;
   font-weight: 400;
   letter-spacing: 8px;
-  margin: 0;
-
+  line-height: 1;
+  margin:0;
 }
 
 .footer-brand p{

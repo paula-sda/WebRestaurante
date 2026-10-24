@@ -12,6 +12,8 @@ header{
   font-size: 28px;
   font-weight: bold;
   letter-spacing: 4px;
+  line-height: 1;
+  margin:0;
 }
 
 nav{
@@ -30,7 +32,7 @@ nav a{
   text-transform: uppercase;
 }
 
-nav a:hover{
+nav a:hover, nav a.active{
   color: #c7a46a;
   text-decoration:underline;
 }

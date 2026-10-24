@@ -38,7 +38,8 @@
   font-size: 70px;
   font-weight: 400;
   text-align: center;
-  margin: 0;
+  line-height: 1;
+  margin:0;
 }
 
 .reservation-header p {
@@ -96,8 +97,9 @@
 }
 
 .reservations-panel button {
-  display: block;
-  margin: 30px auto 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   padding: 14px 28px;
 
   border: 1px solid #c5a36b;
