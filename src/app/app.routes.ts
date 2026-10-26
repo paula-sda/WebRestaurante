@@ -7,9 +7,9 @@ import { Reservations } from './pages/reservations/reservations';
 
 
 export const routes: Routes = [
-  { path: '', component: Home },
-  { path: 'menu', component: Menu },
-  { path: 'menu/:id', component: Detail },
-  { path: 'reservas', component: Reservations}
+  { path: '', component: Home, title: 'Inicio | Rouge de Minuit' },
+  { path: 'menu', component: Menu , title: 'Menu | Rouge de Minuit'},
+  { path: 'menu/:id', component: Detail, title: 'Detalle | Rouge de Minuit' },
+  { path: 'reservas', component: Reservations, title: 'Reservas | Rouge de Minuit'}
 
 ];
