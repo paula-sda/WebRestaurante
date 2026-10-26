@@ -4,6 +4,8 @@ import { EmailService } from '../../services/email';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {form, FormField,email,minLength,pattern,required} from '@angular/forms/signals';
+import type { ReservationForm } from '../../models/reservation';
+
 @Component({
   selector: 'app-reservations',
   imports: [MatTooltipModule, MatButtonModule, FormField],
@@ -11,7 +13,7 @@ import {form, FormField,email,minLength,pattern,required} from '@angular/forms/s
   styleUrl: './reservations.css',
 })
 export class Reservations {
-  reserva=signal({
+  reserva=signal<ReservationForm>({
     fecha:this.fechaActual(),
     hora: '20:00',
     personas:'2',

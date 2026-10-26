@@ -3,17 +3,10 @@
 
 import { Injectable } from '@angular/core';
 import emailjs from '@emailjs/browser';
+import type { ReservationEmail } from '../models/reservation';
 
 import { EMAILJS_CONFIG } from './emailjs-config';
 
-export interface ReservationEmail {
-  email: string;
-  nombre: string;
-  fecha: string;
-  hora: string;
-  personas: number;
-  telefono: string;
-}
 
 @Injectable({
   providedIn: 'root',

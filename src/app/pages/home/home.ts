@@ -1,6 +1,7 @@
 import { Component,signal } from '@angular/core';
 import {form, FormField,required} from '@angular/forms/signals';
 import { RouterLink, Router } from '@angular/router';
+import type { HomeReservationForm } from '../../models/reservation';
 @Component({
   selector: 'app-home',
   imports: [RouterLink, FormField],
@@ -9,7 +10,7 @@ import { RouterLink, Router } from '@angular/router';
 })
 export class Home {
 
-  reserva=signal({
+  reserva=signal<HomeReservationForm>({
     fecha:this.fechaActual(),
     hora: '20:00',
     personas:'2',
