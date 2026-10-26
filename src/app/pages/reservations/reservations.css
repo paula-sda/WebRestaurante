@@ -82,18 +82,9 @@
 
 .form-grid input,
 .form-grid select {
-  width: 100%;
-  min-height: 44px;
-  padding: 10px;
-  box-sizing: border-box;
-
   border: 1px solid #65464d;
-  border-radius: 5px;
   background-color: #211a1c;
   color: #fff;
-
-  font-family: 'Montserrat', sans-serif;
-  font-size: 13px;
 }
 
 .reservations-panel button {
