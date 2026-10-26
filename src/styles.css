@@ -31,14 +31,14 @@ max-width: 100%;
 @keyframes zoom-fade-out {
   to {
     opacity: 0;
-    transform: scale(0.97);
+    transform: scale(0.99);
   }
 }
 
 @keyframes zoom-fade-in {
   from {
     opacity: 0;
-    transform: scale(1.03);
+    transform: scale(1.01);
   }
 
   to {
@@ -48,11 +48,11 @@ max-width: 100%;
 }
 
 ::view-transition-old(root) {
-  animation: 250ms ease-in both zoom-fade-out;
+  animation: 400ms cubic-bezier(0.4, 0, 0.2, 1) both zoom-fade-out;
 }
 
 ::view-transition-new(root) {
-  animation: 350ms ease-out both zoom-fade-in;
+  animation: 500ms cubic-bezier(0.16, 1, 0.3, 1) both zoom-fade-in;
 }
 
 @media (prefers-reduced-motion: reduce) {
