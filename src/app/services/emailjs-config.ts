@@ -1,5 +1,3 @@
-export const EMAILJS_CONFIG = {
-  serviceId: 'webBAR',
-  templateId: 'template_webBar',
-  publicKey: '9S-Un46dBjDixmxY6',
-};
+import { environment } from "../../environments/environment";
+
+export const EMAILJS_CONFIG = environment.emailjs;
