@@ -1,16 +1,27 @@
-import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Component,signal } from '@angular/core';
+import {form, FormField,required} from '@angular/forms/signals';
 import { RouterLink, Router } from '@angular/router';
 @Component({
   selector: 'app-home',
-  imports: [RouterLink, FormsModule],
+  imports: [RouterLink, FormField],
   templateUrl: './home.html',
   styleUrl: './home.css',
 })
 export class Home {
-  fecha = this.fechaActual();
-  hora= '20:00';
-  personas =2;
+
+  reserva=signal({
+    fecha:this.fechaActual(),
+    hora: '20:00',
+    personas:'2',
+
+  });
+
+  reservaForm = form(this.reserva, (path) => { 
+    required(path.fecha);
+    required(path.hora);
+    required(path.personas);
+  });
+  
 
   constructor(private router: Router) {}
 
@@ -24,11 +35,16 @@ export class Home {
   }
 
   reservar(): void {
+    if( this.reservaForm().invalid()){
+      return;
+    }
+    const datos=this.reserva();
+
     void this.router.navigate(['/reservas'], {
       queryParams: {
-        fecha: this.fecha,
-        hora: this.hora,
-        personas: this.personas,
+        fecha: datos.fecha,
+        hora: datos.hora,
+        personas: datos.personas,
       },
     });
   }

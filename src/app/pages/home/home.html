@@ -8,42 +8,45 @@
 </section>
 
 <section class="home-reservation">
-  <form class="home-reservation-form" (ngSubmit)="reservar()">
+  <form class="home-reservation-form" (submit)="$event.preventDefault(); reservar()">
     <label>
       Fecha
       <input
         type="date"
-        name="fecha"
-        [(ngModel)]="fecha"
-        [min]="fechaActual()"
-        required>
+        [formField]="reservaForm.fecha"
+        >
     </label>
 
     <label>
-      Hora
-      <select name="hora" [(ngModel)]="hora" required>
-        <option value="18:00">18:00</option>
-        <option value="18:30">18:30</option>
-        <option value="19:00">19:00</option>
-        <option value="19:30">19:30</option>
-        <option value="20:00">20:00</option>
-        <option value="20:30">20:30</option>
-        <option value="21:00">21:00</option>
-        <option value="21:30">21:30</option>
-      </select>
-    </label>
+            Hora
+            <select [formField]="reservaForm.hora">
+              <option value="18:00">18:00</option>
+              <option value="18:30">18:30</option>
+              <option value="19:00">19:00</option>
+              <option value="19:30">19:30</option>
+              <option value="20:00">20:00</option>
+              <option value="20:30">20:30</option>
+              <option value="21:00">21:00</option>
+              <option value="21:30">21:30</option>
+              <option value="22:00">22:00</option>
+              <option value="22:30">22:30</option>
+              <option value="23:00">23:00</option>
+              <option value="23:30">23:30</option>
 
-    <label>
-      Número de personas
-      <select name="personas" [(ngModel)]="personas" required>
-        <option [ngValue]="1">1 persona</option>
-        <option [ngValue]="2">2 personas</option>
-        <option [ngValue]="3">3 personas</option>
-        <option [ngValue]="4">4 personas</option>
-        <option [ngValue]="5">5 personas</option>
-        <option [ngValue]="6">6 personas</option>
-      </select>
-    </label>
+            </select>
+          </label>
+
+          <label>
+            Número de personas
+            <select [formField]="reservaForm.personas">
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
+            </select>
+          </label>
 
     <button type="submit">Realizar reserva</button>
   </form>

@@ -4,19 +4,19 @@
     <p>Completa tus datos para preparar tu proxima visita</p>
 
     <div class="reservations-panel">
-      <form #reservaForm="ngForm" (ngSubmit)="confirmarReserva(reservaForm)">
+      <form (submit)="$event.preventDefault(); confirmarReserva()">
         <h2>Datos de la reserva</h2>
         <div class="form-grid">
           <label>
             Fecha
-            <input type="date" name="fecha" [(ngModel)]="fecha" [min]="minFecha" required />
-            @if (fecha && fecha < minFecha) {
+            <input type="date" [formField]="reservaForm.fecha"/>
+            @if (fechaInvalida) {
               <small class="field-error" role="alert">La fecha no puede ser anterior a hoy.</small>
             }
           </label>
           <label>
             Hora
-            <select name="hora" [(ngModel)]="hora" required>
+            <select [formField]="reservaForm.hora">
               <option value="18:00">18:00</option>
               <option value="18:30">18:30</option>
               <option value="19:00">19:00</option>
@@ -25,18 +25,23 @@
               <option value="20:30">20:30</option>
               <option value="21:00">21:00</option>
               <option value="21:30">21:30</option>
+              <option value="22:00">22:00</option>
+              <option value="22:30">22:30</option>
+              <option value="23:00">23:00</option>
+              <option value="23:30">23:30</option>
+
             </select>
           </label>
 
           <label>
             Número de personas
-            <select name="personas" [(ngModel)]="personas" required>
-              <option [ngValue]="1">1 persona</option>
-              <option [ngValue]="2">2 personas</option>
-              <option [ngValue]="3">3 personas</option>
-              <option [ngValue]="4">4 personas</option>
-              <option [ngValue]="5">5 personas</option>
-              <option [ngValue]="6">6 personas</option>
+            <select [formField]="reservaForm.personas">
+              <option value="1">1 persona</option>
+              <option value="2">2 personas</option>
+              <option value="3">3 personas</option>
+              <option value="4">4 personas</option>
+              <option value="5">5 personas</option>
+              <option value="6">6 personas</option>
             </select>
           </label>
         </div>
@@ -46,26 +51,27 @@
             Nombre completo
             <input
               type="text"
-              name="nombre"
-              [(ngModel)]="nombre"
-              minlength="2"
+              [formField]="reservaForm.nombre"
               autocomplete="name"
-              required
             />
+            @if(reservaForm.nombre().touched() && reservaForm.nombre().invalid()){
+              @if (reserva().nombre.length===0){
+                <small class="field-error" role="alert">El nombre es obligatorio</small>
+              }@else {
+                <small class="field-error" role="alert">El nombre debe tener al menos 2 caracteres</small>
+
+              }
+            }
           </label>
-          <!--He utilizado chat para buscar el patron del telefono y del email-->
           <label>
             Correo electrónico
             <input
               type="email"
-              name="email"
-              [(ngModel)]="email"
-              #emailCtrl="ngModel"
-              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}"
+              [formField]="reservaForm.email"
               autocomplete="email"
-              required
+              
             />
-            @if (emailCtrl.invalid && emailCtrl.touched) {
+            @if (reservaForm.email().invalid() && reservaForm.email().touched()) {
               <small>Introduce un correo válido, por ejemplo nombre@dominio.com.</small>
             }
           </label>
@@ -74,12 +80,18 @@
             Teléfono
             <input
               type="tel"
-              name="telefono"
-              [(ngModel)]="telefono"
-              pattern="[0-9+() -]{9,16}"
+              [formField]="reservaForm.telefono"
               autocomplete="tel"
-              required
+              
             />
+            @if(reservaForm.telefono().touched() && reservaForm.telefono().invalid()){
+              @if (reserva().telefono.length===0){
+                <small class="field-error" role="alert">El telefono es obligatorio</small>
+              }@else {
+                <small class="field-error" role="alert">Introduce un telefono valido</small>
+
+              }
+            }
           </label>
         </div>
         @if (!confirmado) {
@@ -91,7 +103,7 @@
             <button
               matButton="elevated"
               type="submit"
-              [disabled]="reservaForm.invalid || (fecha !== '' && fecha < minFecha) || enviando"
+              [disabled]="reservaForm().invalid() || fechaInvalida || enviando"
             >
               {{ enviando ? 'Enviando...' : 'Confirmar reserva' }}
             </button>
@@ -108,10 +120,10 @@
       @if (confirmado) {
         <div class="reservation-message success" role="status">
           <h2>¡Solicitud completada!</h2>
-          <p><strong>Nombre: </strong>{{ nombre }}</p>
-          <p><strong>Fecha: </strong>{{ fecha }}</p>
-          <p><strong>Hora: </strong>{{ hora }}</p>
-          <p><strong>Personas: </strong>{{ personas }}</p>
+          <p><strong>Nombre: </strong>{{ reserva().nombre }}</p>
+          <p><strong>Fecha: </strong>{{ reserva().fecha }}</p>
+          <p><strong>Hora: </strong>{{ reserva().hora }}</p>
+          <p><strong>Personas: </strong>{{ reserva().personas }}</p>
         </div>
       }
     </div>

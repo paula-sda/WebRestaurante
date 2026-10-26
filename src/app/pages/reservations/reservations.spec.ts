@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { Reservations } from './reservations';
+import { ActivatedRoute } from '@angular/router';
 
 describe('Reservations', () => {
   let component: Reservations;
@@ -9,6 +10,14 @@ describe('Reservations', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Reservations],
+      providers:[
+        {
+        provide: ActivatedRoute,
+        useValue:{
+          snapshot:{queryParamMap:{get:()=>null}},
+        },
+        },
+      ],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Reservations);
@@ -20,12 +29,17 @@ describe('Reservations', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should reject a reservation date before today', () => {
-    component.fecha = '2000-01-01';
+  it('should reject a reservation date before today', async() => {
+    component.reserva.update((datos) => ({
+      ...datos,
+      fecha: '2000-01-01',
+    }));
 
-    component.confirmarReserva({ invalid: true });
+    await component.confirmarReserva();
 
     expect(component.confirmado).toBe(false);
-    expect(component.error).toBe('La fecha de la reserva no puede ser anterior a hoy.');
+    expect(component.error).toBe('La fecha de la reserva no puede ser anterior a hoy.',
+
+    );
   });
 });
