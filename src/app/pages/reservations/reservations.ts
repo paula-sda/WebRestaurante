@@ -5,7 +5,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {form, FormField,email,minLength,pattern,required} from '@angular/forms/signals';
 import type { ReservationForm } from '../../models/reservation';
-import { HORAS_RESERVA, OPCIONES_PERSONAS } from '../../data/reservation-options';
+import { RESERVATION_HOURS, PERSON_NUMBER } from '../../data/reservation-options';
 
 
 @Component({
@@ -20,8 +20,8 @@ export class Reservations {
   private route = inject(ActivatedRoute);
   private emailService = inject(EmailService);
 
-  horasReserva = HORAS_RESERVA;
-  opcionesPersonas = OPCIONES_PERSONAS;
+  horasReserva = RESERVATION_HOURS;
+  opcionesPersonas = PERSON_NUMBER;
 
   reserva=signal<ReservationForm>({
     fecha:this.fechaActual(),

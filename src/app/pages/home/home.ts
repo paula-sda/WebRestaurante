@@ -2,7 +2,7 @@ import { Component,inject,signal } from '@angular/core';
 import {form, FormField,required} from '@angular/forms/signals';
 import { RouterLink, Router } from '@angular/router';
 import type { HomeReservationForm } from '../../models/reservation';
-import { HORAS_RESERVA, OPCIONES_PERSONAS } from '../../data/reservation-options';
+import { RESERVATION_HOURS, PERSON_NUMBER } from '../../data/reservation-options';
 
 @Component({
   selector: 'app-home',
@@ -12,8 +12,8 @@ import { HORAS_RESERVA, OPCIONES_PERSONAS } from '../../data/reservation-options
 })
 export class Home {
   private router = inject(Router);
-  horasReserva = HORAS_RESERVA;
-  opcionesPersonas = OPCIONES_PERSONAS;
+  horasReserva = RESERVATION_HOURS;
+  opcionesPersonas = PERSON_NUMBER;
   
   reserva=signal<HomeReservationForm>({
     fecha:this.fechaActual(),

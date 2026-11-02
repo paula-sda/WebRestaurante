@@ -1,6 +1,6 @@
-export const HORAS_RESERVA = [
+export const RESERVATION_HOURS = [
   '18:00', '18:30', '19:00', '19:30', '20:00', '20:30',
   '21:00', '21:30', '22:00', '22:30', '23:00', '23:30',
 ];
 
-export const OPCIONES_PERSONAS = [1, 2, 3, 4, 5, 6];
+export const PERSON_NUMBER = [1, 2, 3, 4, 5, 6];
