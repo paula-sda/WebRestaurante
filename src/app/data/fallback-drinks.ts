@@ -1,0 +1,142 @@
+import { Drink, DrinkIngredient } from '../models/drink';
+
+const ingredient = (name: string, fileName: string): DrinkIngredient => ({
+  name,
+  image: `/images/ingredients/${fileName}.jpg`,
+});
+
+export const FALLBACK_DRINKS: Drink[] = [
+  {
+    idDrink: 'local-mojito',
+    strDrink: 'Mojito',
+    strAlcoholic: 'Alcoholic',
+    strDrinkThumb: '/images/drinks/mojito.jpeg',
+    price: 7,
+    ingredients: [
+      ingredient('Ron blanco', 'ron-blanco'),
+      ingredient('Hierbabuena', 'hierbabuena'),
+      ingredient('Lima', 'lima'),
+      ingredient('Soda', 'soda'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-margarita',
+    strDrink: 'Margarita',
+    strAlcoholic: 'Alcoholic',
+    strDrinkThumb: '/images/drinks/margarita.jpeg',
+    price: 8,
+    ingredients: [
+      ingredient('Tequila', 'tequila'),
+      ingredient('Licor de naranja', 'licor-naranja'),
+      ingredient('Zumo de lima', 'lima'),
+      ingredient('Sal', 'azucar'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-pina-colada',
+    strDrink: 'Piña Colada',
+    strAlcoholic: 'Alcoholic',
+    strDrinkThumb: '/images/drinks/pina-colada.jpeg',
+    price: 8,
+    ingredients: [
+      ingredient('Ron blanco', 'ron-blanco'),
+      ingredient('Crema de coco', 'coco'),
+      ingredient('Zumo de piña', 'zumo-de-pina'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-daiquiri',
+    strDrink: 'Daiquiri',
+    strAlcoholic: 'Alcoholic',
+    strDrinkThumb: '/images/drinks/daiquiri.jpg',
+    price: 7,
+    ingredients: [
+      ingredient('Ron blanco', 'ron-blanco'),
+      ingredient('Zumo de lima', 'lima'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-moscow-mule',
+    strDrink: 'Moscow Mule',
+    strAlcoholic: 'Alcoholic',
+    strDrinkThumb: '/images/drinks/moscow-mule.webp',
+    price: 7.5,
+    ingredients: [
+      ingredient('Vodka', 'vodka'),
+      ingredient('Ginger beer', 'beer'),
+      ingredient('Zumo de lima', 'lima'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-virgin-mojito',
+    strDrink: 'Mojito sin alcohol',
+    strAlcoholic: 'Non-Alcoholic',
+    strDrinkThumb: '/images/drinks/mojito.jpeg',
+    price: 6.5,
+    ingredients: [
+      ingredient('Hierbabuena', 'hierbabuena'),
+      ingredient('Lima', 'lima'),
+      ingredient('Azúcar', 'azucar'),
+      ingredient('Soda', 'soda'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-lemonade',
+    strDrink: 'Limonada',
+    strAlcoholic: 'Non-Alcoholic',
+    strDrinkThumb: '/images/drinks/limonada.avif',
+    price: 6,
+    ingredients: [
+      ingredient('Limón', 'lima'),
+      ingredient('Azúcar', 'azucar'),
+      ingredient('Hielo', 'hielo'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-shirley-temple',
+    strDrink: 'Shirley Temple',
+    strAlcoholic: 'Non-Alcoholic',
+    strDrinkThumb: '/images/drinks/Shirley-temple.jpg',
+    price: 7,
+    ingredients: [
+      ingredient('Ginger ale', 'ale'),
+      ingredient('Granadina', 'granadina'),
+      ingredient('Zumo de lima', 'lima'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-virgin-pina-colada',
+    strDrink: 'Piña Colada sin alcohol',
+    strAlcoholic: 'Non-Alcoholic',
+    strDrinkThumb: '/images/drinks/pina-colada.jpeg',
+    price: 8,
+    ingredients: [
+      ingredient('Crema de coco', 'coco'),
+      ingredient('Zumo de piña', 'zumo-de-pina'),
+      ingredient('Hielo', 'hielo'),
+    ],
+    local: true,
+  },
+  {
+    idDrink: 'local-san-francisco',
+    strDrink: 'San Francisco',
+    strAlcoholic: 'Non-Alcoholic',
+    strDrinkThumb: '/images/drinks/san-francisco.jpeg',
+    price: 7.5,
+    ingredients: [
+      ingredient('Zumo de naranja', 'zumo-naranja'),
+      ingredient('Zumo de piña', 'zumo-de-pina'),
+      ingredient('Zumo de melocotón', 'zumo-melocoton'),
+      ingredient('Granadina', 'granadina'),
+    ],
+    local: true,
+  },
+];

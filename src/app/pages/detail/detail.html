@@ -2,7 +2,11 @@
   <section class="detail">
     <div class="detail-container">
       <div class="detail-image">
-        <img [src]="bebida.strDrinkThumb" [alt]="bebida.strDrink" />
+        <img
+          [src]="bebida.strDrinkThumb"
+          [alt]="bebida.strDrink"
+          (error)="bebida.local && usePlaceholderImage($event)"
+        />
       </div>
       <div class="detail-info">
         <h1>{{ bebida.strDrink }}</h1>
@@ -13,7 +17,11 @@
           <div class="ingredients">
             @for (ingredient of ingredients(); track ingredient.name) {
               <div class="ingredient">
-                <img [src]="ingredient.image" [alt]="ingredient.name" />
+                <img
+                  [src]="ingredient.image"
+                  [alt]="ingredient.name"
+                  (error)="bebida.local && usePlaceholderImage($event)"
+                />
                 <p>{{ ingredient.name }}</p>
               </div>
             }

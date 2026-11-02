@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 export class DrinkService {
   constructor(private http: HttpClient) {}
   getDrinks() {
-    return this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic ');
+    return this.http.get<any>('https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Alcoholic');
   }
 
   getNonAlcoholicDrinks() {
@@ -15,8 +15,8 @@ export class DrinkService {
   }
 
   getDrinkById(id: string) {
-    return this.http.get<any>(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
-  }
+      return this.http.get<any>(`https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`);
+    }
 
   getPrice(idDrink: string) : number {
     const id = Number(idDrink);
@@ -25,4 +25,3 @@ export class DrinkService {
   }
 
 }
-

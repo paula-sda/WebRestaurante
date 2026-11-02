@@ -2,6 +2,7 @@ import { Component, signal } from '@angular/core';
 import { Drink } from '../../models/drink';
 import { ActivatedRoute } from '@angular/router';
 import { RouterLink } from '@angular/router';
+import { FALLBACK_DRINKS } from '../../data/fallback-drinks';
 import { DrinkService } from '../../services/drink';
 
 @Component({
@@ -14,6 +15,13 @@ export class Detail {
   drink = signal<Drink | null>(null);
   ingredients = signal<{ name: string; image: string }[]>([]);
 
+  usePlaceholderImage(event: Event): void {
+    const image = event.target;
+    if (image instanceof HTMLImageElement && !image.src.endsWith('/images/img2.jpg')) {
+      image.src = '/images/img2.jpg';
+    }
+  }
+
   constructor(
     private drinkService: DrinkService,
     private route: ActivatedRoute,
@@ -21,6 +29,13 @@ export class Detail {
     this.route.params.subscribe((params) => {
       const id = params['id'];
       console.log('ID del drink:', id);
+
+      const localDrink = FALLBACK_DRINKS.find((drink) => drink.idDrink === id);
+      if (localDrink) {
+        this.drink.set(localDrink);
+        this.ingredients.set(localDrink.ingredients ?? []);
+        return;
+      }
 
       this.drinkService.getDrinkById(id).subscribe(
         (resultado) => {

@@ -1,7 +1,8 @@
 import { Component, signal, computed } from '@angular/core';
-import { firstValueFrom } from 'rxjs';
+import { firstValueFrom, forkJoin, timeout } from 'rxjs';
 
 import { DrinkCard } from '../../components/drink-card/drink-card';
+import { FALLBACK_DRINKS } from '../../data/fallback-drinks';
 import { Drink } from '../../models/drink';
 import { DrinkService } from '../../services/drink';
 
@@ -40,12 +41,18 @@ export class Menu {
     this.loading.set(true);
     this.error.set('');
     try {
-      const alcoholicDrinks = await firstValueFrom(this.drinkService.getDrinks());
+      const { alcoholicDrinks, nonAlcoholicDrinks } = await firstValueFrom(
+        forkJoin({
+          alcoholicDrinks: this.drinkService.getDrinks().pipe(timeout({ first: 10000 })),
+          nonAlcoholicDrinks: this.drinkService
+            .getNonAlcoholicDrinks()
+            .pipe(timeout({ first: 10000 })),
+        }),
+      );
       console.log('Alcoholic drinks:', alcoholicDrinks);
-      const nonAlcoholicDrinks = await firstValueFrom(this.drinkService.getNonAlcoholicDrinks());
       console.log('Non-Alcoholic drinks:', nonAlcoholicDrinks);
 
-      this.drinks.set([
+      const drinks: Drink[] = [
         ...alcoholicDrinks.drinks.map((drink: Drink) => ({
           ...drink,
           strAlcoholic: 'Alcoholic',
@@ -56,14 +63,25 @@ export class Menu {
           strAlcoholic: 'Non-Alcoholic',
           price: this.drinkService.getPrice(drink.idDrink),
         })),
-      ]);
+      ];
 
+      if (drinks.length === 0) {
+        this.drinks.set([]);
+        return;
+      }
+
+      this.drinks.set(drinks);
       console.log('Todas las bebidas:', this.drinks().length);
     } catch (error) {
       console.error('Error al obtener las bebidas:', error);
-      this.error.set('No se han podido cargar las bebidas. Intentalo de nuevo.')
-    } finally{
+      this.useFallbackDrinks('No se pudo conectar con la API. Se muestra el menú local.');
+    } finally {
       this.loading.set(false);
     }
+  }
+
+  private useFallbackDrinks(message: string): void {
+    this.drinks.set(FALLBACK_DRINKS);
+    this.error.set(message);
   }
 }

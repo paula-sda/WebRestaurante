@@ -54,15 +54,16 @@
     <div class="drinks-grid">
       @if (loading()) {
         <p role="status">Cargando bebidas...</p>
-      } @else if (error()) {
-        <p role="alert">{{ error() }}</p>
-      } @else if (filteredDrinks().length === 0) {
-        <p>No hay bebidas que cumplan ese filtro</p>
       } @else {
-        @for (drink of filteredDrinks(
-          
-        ); track drink.idDrink) {
-          <app-drink-card [drink]="drink"></app-drink-card>
+        @if (error()) {
+          <p role="alert">{{ error() }}</p>
+        }
+        @if (filteredDrinks().length === 0) {
+          <p>No hay bebidas que cumplan ese filtro</p>
+        } @else {
+          @for (drink of filteredDrinks(); track drink.idDrink) {
+            <app-drink-card [drink]="drink"></app-drink-card>
+          }
         }
       }
     </div>
