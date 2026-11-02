@@ -1,7 +1,9 @@
-import { Component,signal } from '@angular/core';
+import { Component,inject,signal } from '@angular/core';
 import {form, FormField,required} from '@angular/forms/signals';
 import { RouterLink, Router } from '@angular/router';
 import type { HomeReservationForm } from '../../models/reservation';
+import { HORAS_RESERVA, OPCIONES_PERSONAS } from '../../data/reservation-options';
+
 @Component({
   selector: 'app-home',
   imports: [RouterLink, FormField],
@@ -9,7 +11,10 @@ import type { HomeReservationForm } from '../../models/reservation';
   styleUrl: './home.css',
 })
 export class Home {
-
+  private router = inject(Router);
+  horasReserva = HORAS_RESERVA;
+  opcionesPersonas = OPCIONES_PERSONAS;
+  
   reserva=signal<HomeReservationForm>({
     fecha:this.fechaActual(),
     hora: '20:00',
@@ -23,9 +28,6 @@ export class Home {
     required(path.personas);
   });
   
-
-  constructor(private router: Router) {}
-
   fechaActual(): string {
     const hoy = new Date();
     const anio = hoy.getFullYear();

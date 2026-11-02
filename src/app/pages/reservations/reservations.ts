@@ -5,6 +5,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatButtonModule} from '@angular/material/button';
 import {form, FormField,email,minLength,pattern,required} from '@angular/forms/signals';
 import type { ReservationForm } from '../../models/reservation';
+import { HORAS_RESERVA, OPCIONES_PERSONAS } from '../../data/reservation-options';
+
 
 @Component({
   selector: 'app-reservations',
@@ -12,7 +14,12 @@ import type { ReservationForm } from '../../models/reservation';
   templateUrl: './reservations.html',
   styleUrl: './reservations.css',
 })
+
 export class Reservations {
+
+  horasReserva = HORAS_RESERVA;
+  opcionesPersonas = OPCIONES_PERSONAS;
+
   reserva=signal<ReservationForm>({
     fecha:this.fechaActual(),
     hora: '20:00',

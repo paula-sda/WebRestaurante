@@ -58,9 +58,9 @@ export class Menu {
           strAlcoholic: 'Alcoholic',
           price: this.drinkService.getPrice(drink.idDrink),
         })),
-        ...nonAlcoholicDrinks.drinks.map((drink: Drink) => ({
+        ...nonAlcoholicDrinks.drinks.map((drink: Drink, alcoholic: boolean) => ({
           ...drink,
-          strAlcoholic: 'Non-Alcoholic',
+          strAlcoholic: alcoholic ? 'Alcoholic' : 'Non-Alcoholic',
           price: this.drinkService.getPrice(drink.idDrink),
         })),
       ];

@@ -17,31 +17,20 @@
           <label>
             Hora
             <select [formField]="reservaForm.hora">
-              <option value="18:00">18:00</option>
-              <option value="18:30">18:30</option>
-              <option value="19:00">19:00</option>
-              <option value="19:30">19:30</option>
-              <option value="20:00">20:00</option>
-              <option value="20:30">20:30</option>
-              <option value="21:00">21:00</option>
-              <option value="21:30">21:30</option>
-              <option value="22:00">22:00</option>
-              <option value="22:30">22:30</option>
-              <option value="23:00">23:00</option>
-              <option value="23:30">23:30</option>
-
+              @for (hora of horasReserva; track hora) {
+                <option [value]="hora">{{ hora }}</option>
+              }
             </select>
           </label>
 
           <label>
             Número de personas
             <select [formField]="reservaForm.personas">
-              <option value="1">1 persona</option>
-              <option value="2">2 personas</option>
-              <option value="3">3 personas</option>
-              <option value="4">4 personas</option>
-              <option value="5">5 personas</option>
-              <option value="6">6 personas</option>
+              @for (persona of opcionesPersonas; track persona) {
+                <option [value]="persona">
+                  {{ persona }} {{ persona === 1 ? 'persona' : 'personas' }}
+                </option>
+              }
             </select>
           </label>
         </div>
