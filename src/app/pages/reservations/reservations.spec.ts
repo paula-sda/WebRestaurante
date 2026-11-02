@@ -37,7 +37,7 @@ describe('Reservations', () => {
 
     await component.confirmarReserva();
 
-    expect(component.confirmado).toBe(false);
+    expect(component.confirmed).toBe(false);
     expect(component.error).toBe('La fecha de la reserva no puede ser anterior a hoy.',
 
     );

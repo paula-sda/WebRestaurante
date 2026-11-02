@@ -83,7 +83,7 @@
             }
           </label>
         </div>
-        @if (!confirmado) {
+        @if (!confirmed) {
           <span 
           class="reservation-popover"
           matTooltip="Completa correctamente todos los campos" 
@@ -92,9 +92,9 @@
             <button
               matButton="elevated"
               type="submit"
-              [disabled]="reservaForm().invalid() || fechaInvalida || enviando"
+              [disabled]="reservaForm().invalid() || fechaInvalida || sent"
             >
-              {{ enviando ? 'Enviando...' : 'Confirmar reserva' }}
+              {{ sent ? 'Enviando...' : 'Confirmar reserva' }}
             </button>
           </span>
         }
@@ -106,7 +106,7 @@
         </div>
       }
 
-      @if (confirmado) {
+      @if (confirmed) {
         <div class="reservation-message success" role="status">
           <h2>¡Solicitud completada!</h2>
           <p><strong>Nombre: </strong>{{ reserva().name }}</p>

@@ -46,9 +46,9 @@ export class Reservations {
   
 
   error='';
-  confirmado = false;
-  enviando = false;
-  minFecha = this.fechaActual();
+  confirmed = false;
+  sent = false;
+  minDate = this.fechaActual();
 
    constructor(){
     this.reserva.update((datos)=>({
@@ -64,26 +64,26 @@ export class Reservations {
 
    get fechaInvalida(): boolean{
     const fecha = this.reserva().date;
-    return fecha !==''&& fecha<this.minFecha;
+    return fecha !==''&& fecha<this.minDate;
    }
 
    fechaActual(): string {
-    const hoy = new Date();
-    const anio = hoy.getFullYear();
-    const mes = String(hoy.getMonth()+1).padStart(2,'0');
-    const dia = String(hoy.getDate()).padStart(2,'0');
+    const today = new Date();
+    const year = today.getFullYear();
+    const month = String(today.getMonth()+1).padStart(2,'0');
+    const day = String(today.getDate()).padStart(2,'0');
 
-    return `${anio}-${mes}-${dia}`;
+    return `${year}-${month}-${day}`;
 
    }
 
    async confirmarReserva(): Promise<void>{
     this.error = '';
-    this.confirmado= false;
+    this.confirmed= false;
 
-    const datos = this.reserva();
+    const data = this.reserva();
 
-    if(datos.date < this.minFecha){
+    if(data.date < this.minDate){
       this.error='La fecha de la reserva no puede ser anterior a hoy.';
       return;
     }
@@ -93,27 +93,27 @@ export class Reservations {
       return;
     }
 
-    if(datos.date=== '2027-01-01' && datos.hour ==='20:30'){
+    if(data.date=== '2027-01-01' && data.hour ==='20:30'){
       this.error='Lo sentimos, no hay disponibilidad para esa fecha y hora.';
       return;
     }
 
-    this.enviando = true;
+    this.sent = true;
     try {
       await this.emailService.sendReservationConfirmation({
-        email: datos.email,
-        nombre: datos.name,
-        fecha: datos.date,
-        hora: datos.hour,
-        personas: Number(datos.persons),
-        telefono: datos.phone,
+        email: data.email,
+        nombre: data.name,
+        fecha: data.date,
+        hora: data.hour,
+        personas: Number(data.persons),
+        telefono: data.phone,
       });
-      this.confirmado = true;
+      this.confirmed = true;
     } catch (error) {
       console.error('No se pudo enviar el correo de confirmación:', error);
       this.error = 'No se pudo enviar el correo de confirmación. Inténtalo de nuevo más tarde.';
     } finally {
-      this.enviando = false;
+      this.sent = false;
     }
    }
 }
