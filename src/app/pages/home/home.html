@@ -13,14 +13,14 @@
       Fecha
       <input
         type="date"
-        [formField]="reservaForm.fecha"
+        [formField]="reservaForm.date"
         >
     </label>
 
     <label>
             Hora
-            <select [formField]="reservaForm.hora">
-              @for (hora of horasReserva; track hora) {
+            <select [formField]="reservaForm.hour">
+              @for (hora of reservationHours; track hora) {
                 <option [value]="hora">{{ hora }}</option>
               }
             </select>
@@ -28,8 +28,8 @@
 
           <label>
             Número de personas
-            <select [formField]="reservaForm.personas">
-              @for (persona of opcionesPersonas; track persona) {
+            <select [formField]="reservaForm.persons">
+              @for (persona of personNumber; track persona) {
                 <option [value]="persona">
                   {{ persona }} {{ persona === 1 ? 'persona' : 'personas' }}
                 </option>

@@ -9,14 +9,14 @@
         <div class="form-grid">
           <label>
             Fecha
-            <input type="date" [formField]="reservaForm.fecha"/>
+            <input type="date" [formField]="reservaForm.date"/>
             @if (fechaInvalida) {
               <small class="field-error" role="alert">La fecha no puede ser anterior a hoy.</small>
             }
           </label>
           <label>
             Hora
-            <select [formField]="reservaForm.hora">
+            <select [formField]="reservaForm.hour">
               @for (hora of horasReserva; track hora) {
                 <option [value]="hora">{{ hora }}</option>
               }
@@ -25,7 +25,7 @@
 
           <label>
             Número de personas
-            <select [formField]="reservaForm.personas">
+            <select [formField]="reservaForm.persons">
               @for (persona of opcionesPersonas; track persona) {
                 <option [value]="persona">
                   {{ persona }} {{ persona === 1 ? 'persona' : 'personas' }}
@@ -40,11 +40,11 @@
             Nombre completo
             <input
               type="text"
-              [formField]="reservaForm.nombre"
+              [formField]="reservaForm.name"
               autocomplete="name"
             />
-            @if(reservaForm.nombre().touched() && reservaForm.nombre().invalid()){
-              @if (reserva().nombre.length===0){
+            @if(reservaForm.name().touched() && reservaForm.name().invalid()){
+              @if (reserva().name.length===0){
                 <small class="field-error" role="alert">El nombre es obligatorio</small>
               }@else {
                 <small class="field-error" role="alert">El nombre debe tener al menos 2 caracteres</small>
@@ -69,12 +69,12 @@
             Teléfono
             <input
               type="tel"
-              [formField]="reservaForm.telefono"
+              [formField]="reservaForm.phone"
               autocomplete="tel"
               
             />
-            @if(reservaForm.telefono().touched() && reservaForm.telefono().invalid()){
-              @if (reserva().telefono.length===0){
+            @if(reservaForm.phone().touched() && reservaForm.phone().invalid()){
+              @if (reserva().phone.length===0){
                 <small class="field-error" role="alert">El telefono es obligatorio</small>
               }@else {
                 <small class="field-error" role="alert">Introduce un telefono valido</small>
@@ -109,10 +109,10 @@
       @if (confirmado) {
         <div class="reservation-message success" role="status">
           <h2>¡Solicitud completada!</h2>
-          <p><strong>Nombre: </strong>{{ reserva().nombre }}</p>
-          <p><strong>Fecha: </strong>{{ reserva().fecha }}</p>
-          <p><strong>Hora: </strong>{{ reserva().hora }}</p>
-          <p><strong>Personas: </strong>{{ reserva().personas }}</p>
+          <p><strong>Nombre: </strong>{{ reserva().name }}</p>
+          <p><strong>Fecha: </strong>{{ reserva().date }}</p>
+          <p><strong>Hora: </strong>{{ reserva().hour }}</p>
+          <p><strong>Personas: </strong>{{ reserva().persons }}</p>
         </div>
       }
     </div>

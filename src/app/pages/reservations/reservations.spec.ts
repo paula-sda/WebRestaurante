@@ -32,7 +32,7 @@ describe('Reservations', () => {
   it('should reject a reservation date before today', async() => {
     component.reserva.update((datos) => ({
       ...datos,
-      fecha: '2000-01-01',
+      date: '2000-01-01',
     }));
 
     await component.confirmarReserva();

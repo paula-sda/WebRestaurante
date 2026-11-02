@@ -1,16 +1,16 @@
 export interface HomeReservationForm{
-    fecha: string;
-    hora: string;
-    personas: string;
+    date: string;
+    hour: string;
+    persons: string;
 }
 
 export interface ReservationForm{
-    fecha: string;
-    hora: string;
-    personas: string;
-    nombre: string;
+    date: string;
+    hour: string;
+    persons: string;
+    name: string;
     email: string;
-    telefono: string;
+    phone: string;
 }
 
 export interface ReservationEmail{

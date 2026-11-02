@@ -24,24 +24,24 @@ export class Reservations {
   opcionesPersonas = PERSON_NUMBER;
 
   reserva=signal<ReservationForm>({
-    fecha:this.fechaActual(),
-    hora: '20:00',
-    personas:'2',
-    nombre: '',
+    date:this.fechaActual(),
+    hour: '20:00',
+    persons:'2',
+    name: '',
     email: '',
-    telefono: '',
+    phone: '',
   });
 
   reservaForm = form(this.reserva, (path) => { 
-    required(path.fecha);
-    required(path.hora);
-    required(path.personas);
-    required(path.nombre);
-    minLength(path.nombre,2);
+    required(path.date);
+    required(path.hour);
+    required(path.persons);
+    required(path.name);
+    minLength(path.name,2);
     required(path.email);
     email(path.email);
-    required(path.telefono);
-    pattern(path.telefono, /^[0-9+() -]{9,16}$/);
+    required(path.phone);
+    pattern(path.phone, /^[0-9+() -]{9,16}$/);
   });
   
 
@@ -53,17 +53,17 @@ export class Reservations {
    constructor(){
     this.reserva.update((datos)=>({
       ...datos,
-      fecha:
+      date:
         this.route.snapshot.queryParamMap.get('fecha') || this.fechaActual(),
-      hora:
+      hour:
         this.route.snapshot.queryParamMap.get('hora') || '20:00',
-      personas: this.route.snapshot.queryParamMap.get('personas') || '2',
+      persons: this.route.snapshot.queryParamMap.get('personas') || '2',
 
     }));
    }
 
    get fechaInvalida(): boolean{
-    const fecha = this.reserva().fecha;
+    const fecha = this.reserva().date;
     return fecha !==''&& fecha<this.minFecha;
    }
 
@@ -83,7 +83,7 @@ export class Reservations {
 
     const datos = this.reserva();
 
-    if(datos.fecha < this.minFecha){
+    if(datos.date < this.minFecha){
       this.error='La fecha de la reserva no puede ser anterior a hoy.';
       return;
     }
@@ -93,7 +93,7 @@ export class Reservations {
       return;
     }
 
-    if(datos.fecha=== '2027-01-01' && datos.hora ==='20:30'){
+    if(datos.date=== '2027-01-01' && datos.hour ==='20:30'){
       this.error='Lo sentimos, no hay disponibilidad para esa fecha y hora.';
       return;
     }
@@ -102,11 +102,11 @@ export class Reservations {
     try {
       await this.emailService.sendReservationConfirmation({
         email: datos.email,
-        nombre: datos.nombre,
-        fecha: datos.fecha,
-        hora: datos.hora,
-        personas: Number(datos.personas),
-        telefono: datos.telefono,
+        nombre: datos.name,
+        fecha: datos.date,
+        hora: datos.hour,
+        personas: Number(datos.persons),
+        telefono: datos.phone,
       });
       this.confirmado = true;
     } catch (error) {

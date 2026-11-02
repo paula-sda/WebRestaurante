@@ -12,20 +12,20 @@ import { RESERVATION_HOURS, PERSON_NUMBER } from '../../data/reservation-options
 })
 export class Home {
   private router = inject(Router);
-  horasReserva = RESERVATION_HOURS;
-  opcionesPersonas = PERSON_NUMBER;
+  reservationHours = RESERVATION_HOURS;
+  personNumber = PERSON_NUMBER;
   
   reserva=signal<HomeReservationForm>({
-    fecha:this.fechaActual(),
-    hora: '20:00',
-    personas:'2',
+    date:this.fechaActual(),
+    hour: '20:00',
+    persons:'2',
 
   });
 
   reservaForm = form(this.reserva, (path) => { 
-    required(path.fecha);
-    required(path.hora);
-    required(path.personas);
+    required(path.date);
+    required(path.hour);
+    required(path.persons);
   });
   
   fechaActual(): string {
@@ -45,9 +45,9 @@ export class Home {
 
     void this.router.navigate(['/reservas'], {
       queryParams: {
-        fecha: datos.fecha,
-        hora: datos.hora,
-        personas: datos.personas,
+        fecha: datos.date,
+        hora: datos.hour,
+        personas: datos.persons,
       },
     });
   }
