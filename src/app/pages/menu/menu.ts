@@ -36,6 +36,14 @@ export class Menu {
     this.getDrinks();
   }
 
+  private mapDrinks(drinks: Drink[], alcoholic: boolean): Drink[] {
+    return drinks.map((drink) => ({
+      ...drink,
+      strAlcoholic: alcoholic ? 'Alcoholic' : 'Non-Alcoholic',
+      price: this.drinkService.getPrice(drink.idDrink),
+    }));
+  }
+
   //consultado con chatgpt porque la API no devuelve todas las bebidas y tengo que sumar las alcoholicas y no alcoholicas
   //consaltado con chatgpt porque la api no contine el precio
   async getDrinks() {
@@ -55,16 +63,8 @@ export class Menu {
       console.log('Non-Alcoholic drinks:', nonAlcoholicDrinks);
 
       const drinks: Drink[] = [
-        ...alcoholicDrinks.drinks.map((drink: Drink) => ({
-          ...drink,
-          strAlcoholic: 'Alcoholic',
-          price: this.drinkService.getPrice(drink.idDrink),
-        })),
-        ...nonAlcoholicDrinks.drinks.map((drink: Drink, alcoholic: boolean) => ({
-          ...drink,
-          strAlcoholic: alcoholic ? 'Alcoholic' : 'Non-Alcoholic',
-          price: this.drinkService.getPrice(drink.idDrink),
-        })),
+        ...this.mapDrinks(alcoholicDrinks.drinks, true),
+        ...this.mapDrinks(nonAlcoholicDrinks.drinks, false),
       ];
 
       if (drinks.length === 0) {
