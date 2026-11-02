@@ -13,7 +13,7 @@ import { DrinkService } from '../../services/drink';
 })
 export class Detail {
   private drinkService = inject(DrinkService);
-  private route = inject(ActivatedRoute);
+  private Activatedroute = inject(ActivatedRoute);
 
   drink = signal<Drink | null>(null);
   ingredients = signal<{ name: string; image: string }[]>([]);
@@ -26,7 +26,7 @@ export class Detail {
   }
 
   constructor() {
-    this.route.params.subscribe((params) => {
+    this.Activatedroute.params.subscribe((params) => {
       const id = params['id'];
       console.log('ID del drink:', id);
 
