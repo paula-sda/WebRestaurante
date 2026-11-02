@@ -1,4 +1,4 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { Drink } from '../../models/drink';
 import { ActivatedRoute } from '@angular/router';
 import { RouterLink } from '@angular/router';
@@ -12,6 +12,9 @@ import { DrinkService } from '../../services/drink';
   styleUrl: './detail.css',
 })
 export class Detail {
+  private drinkService = inject(DrinkService);
+  private route = inject(ActivatedRoute);
+
   drink = signal<Drink | null>(null);
   ingredients = signal<{ name: string; image: string }[]>([]);
 
@@ -22,10 +25,7 @@ export class Detail {
     }
   }
 
-  constructor(
-    private drinkService: DrinkService,
-    private route: ActivatedRoute,
-  ) {
+  constructor() {
     this.route.params.subscribe((params) => {
       const id = params['id'];
       console.log('ID del drink:', id);

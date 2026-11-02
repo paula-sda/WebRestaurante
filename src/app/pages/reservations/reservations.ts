@@ -1,4 +1,4 @@
-import { Component ,signal} from '@angular/core';
+import { Component ,signal, inject} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { EmailService } from '../../services/email';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -16,6 +16,9 @@ import { HORAS_RESERVA, OPCIONES_PERSONAS } from '../../data/reservation-options
 })
 
 export class Reservations {
+
+  private route = inject(ActivatedRoute);
+  private emailService = inject(EmailService);
 
   horasReserva = HORAS_RESERVA;
   opcionesPersonas = OPCIONES_PERSONAS;
@@ -47,10 +50,7 @@ export class Reservations {
   enviando = false;
   minFecha = this.fechaActual();
 
-   constructor(
-    private route: ActivatedRoute,
-    private emailService: EmailService,
-   ){
+   constructor(){
     this.reserva.update((datos)=>({
       ...datos,
       fecha:

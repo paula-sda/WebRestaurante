@@ -1,4 +1,4 @@
-import { Component, signal, computed } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { firstValueFrom, forkJoin, timeout } from 'rxjs';
 
 import { DrinkCard } from '../../components/drink-card/drink-card';
@@ -13,6 +13,8 @@ import { DrinkService } from '../../services/drink';
   styleUrl: './menu.css',
 })
 export class Menu {
+  private drinkService = inject(DrinkService);
+
   drinks = signal<Drink[]>([]);
   selectedType = signal('all');
   minPrice = signal(5);
@@ -29,7 +31,7 @@ export class Menu {
     });
   });
 
-  constructor(private drinkService: DrinkService) {
+  constructor() {
     console.log('Menu creado');
     this.getDrinks();
   }
